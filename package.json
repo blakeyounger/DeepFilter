@@ -1,0 +1,25 @@
+{
+  "name": "deepstyle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node server.js",
+    "client": "npm run --prefix client start",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "algorithmia": "^0.3.10",
+    "body-parser": "^1.19.0",
+    "bootstrap": "^4.3.1",
+    "deepai": "^1.0.10",
+    "express": "^4.17.1",
+    "mdreact": "^0.1.5",
+    "nodemon": "^1.19.1",
+    "react-dom": "^16.8.6",
+    "request": "^2.88.0"
+  }
+}
