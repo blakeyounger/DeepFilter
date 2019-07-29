@@ -25,7 +25,8 @@ app.post("/api", (req, res) => {
     savePaths: [
       "data://.algo/deeplearning/DeepFilter/temp/elon_space_pizza.jpg"
     ],
-    filterName: req.body.filterName
+    filterName: req.body.filterName,
+    mode: "quality"
   };
   algorithmia
     .client("simt8ET7AUsvIhNAQ91NZbALzbd1")
