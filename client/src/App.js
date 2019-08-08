@@ -8,13 +8,15 @@ class App extends Component {
   state = {
     data: null,
     styleName: "alien_goggles",
-    sourceImageURL: null
+    sourceImageURL: null,
+    qualityMode: false
   };
   constructor(props) {
     super(props);
     this.callMyAPI = this.callMyAPI.bind(this);
     this.handleStyleChange = this.handleStyleChange.bind(this);
     this.handleSourceImageChange = this.handleSourceImageChange.bind(this);
+    this.toggleQualityMode = this.toggleQualityMode.bind(this);
   }
 
   componentDidMount() {
@@ -71,6 +73,18 @@ class App extends Component {
   handleSourceImageChange(event) {
     this.setState({ sourceImageURL: event.target.value });
   }
+
+  toggleQualityMode() {
+    if (this.state.qualityMode === false) {
+      this.setState({ qualityMode: true });
+    } else if (this.state.qualityMode === true) {
+      this.setState({ qualityMode: false });
+      console.log(this.state.qualityMode);
+    } else {
+      console.log("Error in toggleQualityMode()");
+    }
+  }
+
   render() {
     const styleNames = [
       "alien_goggles",
@@ -122,7 +136,7 @@ class App extends Component {
             Create your own deep styled artwork
           </div>
         </div>
-        <MDBJumbotron className="styleSelectionJumbotron">
+        <MDBJumbotron className="styleSelectionJumbotron mb-0">
           <h3>Image URL</h3>
           <form action="">
             <input
@@ -131,7 +145,7 @@ class App extends Component {
               onChange={this.handleSourceImageChange}
             />
           </form>
-          <h3 className="styleName mt-3">Style Name</h3>
+          <h3 className="styleName mt-4">Style Name</h3>
           <div className="styleNameContainer">
             <select
               name="styleDropdown"
@@ -141,25 +155,28 @@ class App extends Component {
               {dropdownStyles}
             </select>
           </div>
-
+          <h3 className="mt-4">Quality Mode (takes longer)</h3>
           <MDBInput
-            label="Filled-in unchecked"
+            className="checkbox mt-0"
+            label=" "
             filled
             type="checkbox"
+            onclick={this.toggleQualityMode()}
             id="checkbox1"
+            checked={this.state.qualityMode}
           />
+          <p>{this.state.qualityMode.toString()}</p>
 
-          <MDBBtn onClick={this.callMyAPI} color="dark">
+          <MDBBtn onClick={this.callMyAPI} color="dark" className="mt-3">
             DeepStyle It
           </MDBBtn>
         </MDBJumbotron>
 
-        <div className="styleImageContainer cloudy-knoxville-gradient">
+        <div className="styleImageContainer tempting-azure-gradient">
           <h2>Full Filter List</h2>
           <img className="styleImage" src="DeepFilterStyles.jpg" />
         </div>
         <div id="imageContainer" />
-        <p className="App-intro">{this.state.data}</p>
       </div>
     );
   }

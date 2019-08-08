@@ -61,5 +61,9 @@
 
 .styleSelectionJumbotron {
   background-image: url("https://mdbootstrap.com/img/Photos/Others/gradient1.jpg");
-  object-fit: cover;
+  object-fit: stretch;
+}
+
+.checkbox {
+  display: inline;
 }
