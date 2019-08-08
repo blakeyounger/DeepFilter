@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { MDBJumbotron, MDBBtn, MDBContainer } from "mdbreact";
+import { MDBJumbotron, MDBBtn, MDBContainer, MDBInput } from "mdbreact";
 import logo from "./logo.svg";
 import "./App.css";
 
@@ -116,11 +116,14 @@ class App extends Component {
     ));
     return (
       <div className="App">
-        <div className="styleImageContainer">
-          <img className="styleImage" src="DeepFilterStyles.jpg" />
+        <div className="mainImageContainer">
+          <img className="mainImage" src="austinFiltered1.jpg" />
+          <div className="centeredText">
+            Create your own deep styled artwork
+          </div>
         </div>
-        <div className="bg" />
-        <MDBJumbotron>
+        <MDBJumbotron className="styleSelectionJumbotron">
+          <h3>Image URL</h3>
           <form action="">
             <input
               type="text"
@@ -128,21 +131,33 @@ class App extends Component {
               onChange={this.handleSourceImageChange}
             />
           </form>
+          <h3 className="styleName mt-3">Style Name</h3>
+          <div className="styleNameContainer">
+            <select
+              name="styleDropdown"
+              id="styleDropdown"
+              onChange={e => this.handleStyleChange()}
+            >
+              {dropdownStyles}
+            </select>
+          </div>
+
+          <MDBInput
+            label="Filled-in unchecked"
+            filled
+            type="checkbox"
+            id="checkbox1"
+          />
+
+          <MDBBtn onClick={this.callMyAPI} color="dark">
+            DeepStyle It
+          </MDBBtn>
         </MDBJumbotron>
 
-        <div className="styleNameContainer">
-          <select
-            name="styleDropdown"
-            id="styleDropdown"
-            onChange={e => this.handleStyleChange()}
-          >
-            {dropdownStyles}
-          </select>
-          <p className="styleName">Style Name</p>
+        <div className="styleImageContainer cloudy-knoxville-gradient">
+          <h2>Full Filter List</h2>
+          <img className="styleImage" src="DeepFilterStyles.jpg" />
         </div>
-        <div>styleName state: {this.state.styleName}</div>
-        <div>sourceImageURL state: {this.state.sourceImageURL}</div>
-        <button onClick={this.callMyAPI}>Call API</button>
         <div id="imageContainer" />
         <p className="App-intro">{this.state.data}</p>
       </div>
