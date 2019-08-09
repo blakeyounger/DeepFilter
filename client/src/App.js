@@ -16,7 +16,7 @@ class App extends Component {
     this.callMyAPI = this.callMyAPI.bind(this);
     this.handleStyleChange = this.handleStyleChange.bind(this);
     this.handleSourceImageChange = this.handleSourceImageChange.bind(this);
-    this.toggleQualityMode = this.toggleQualityMode.bind(this);
+    //this.toggleQualityMode = this.toggleQualityMode.bind(this);
   }
 
   componentDidMount() {
@@ -74,16 +74,17 @@ class App extends Component {
     this.setState({ sourceImageURL: event.target.value });
   }
 
-  toggleQualityMode() {
-    if (this.state.qualityMode === false) {
-      this.setState({ qualityMode: true });
-    } else if (this.state.qualityMode === true) {
-      this.setState({ qualityMode: false });
-      console.log(this.state.qualityMode);
-    } else {
-      console.log("Error in toggleQualityMode()");
-    }
-  }
+  // toggleQualityMode() {
+  //   //console.log("toggleQualityMode() triggered");
+  //   // if (this.state.qualityMode === false) {
+  //   //   this.setState({ qualityMode: true });
+  //   // } else if (this.state.qualityMode === true) {
+  //   //   this.setState({ qualityMode: false });
+  //   //   console.log(this.state.qualityMode);
+  //   // } else {
+  //   //   console.log("Error in toggleQualityMode()");
+  //   // }
+  // }
 
   render() {
     const styleNames = [
@@ -155,16 +156,16 @@ class App extends Component {
               {dropdownStyles}
             </select>
           </div>
-          <h3 className="mt-4">Quality Mode (takes longer)</h3>
+          {/* <h3 className="mt-4">Quality Mode (takes longer)</h3>
           <MDBInput
             className="checkbox mt-0"
             label=" "
             filled
             type="checkbox"
-            onclick={this.toggleQualityMode()}
+            onChange={this.toggleQualityMode()}
             id="checkbox1"
             checked={this.state.qualityMode}
-          />
+          /> */}
           <p>{this.state.qualityMode.toString()}</p>
 
           <MDBBtn onClick={this.callMyAPI} color="dark" className="mt-3">
