@@ -165,53 +165,6 @@ class App extends Component {
     );
     return (
       <div className="App">
-        <div className="mainImageContainer">
-          <img className="mainImage" src="austinFiltered1.jpg" />
-          <div className="centeredText">
-            Create your own deep styled artwork
-          </div>
-        </div>
-        <MDBJumbotron className="styleSelectionJumbotron mb-0">
-          <h3>Image URL</h3>
-          <form action="">
-            <input
-              type="text"
-              value={this.state.sourceImageURL}
-              onChange={this.handleSourceImageChange}
-            />
-          </form>
-          <h3 className="styleName mt-4">Style Name</h3>
-          <div className="styleNameContainer">
-            <select
-              name="styleDropdown"
-              id="styleDropdown"
-              onChange={e => this.handleStyleChange()}
-            >
-              {dropdownStyles}
-            </select>
-          </div>
-          {/* <h3 className="mt-4">Quality Mode (takes longer)</h3>
-          <MDBInput
-            className="checkbox mt-0"
-            label=" "
-            filled
-            type="checkbox"
-            onChange={this.toggleQualityMode()}
-            id="checkbox1"
-            checked={this.state.qualityMode}
-          /> */}
-          <p>{this.state.qualityMode.toString()}</p>
-
-          <MDBBtn onClick={this.callMyAPI} color="dark" className="mt-3">
-            DeepStyle It
-          </MDBBtn>
-        </MDBJumbotron>
-        <div className="styleImageContainer tempting-azure-gradient">
-          <h2>Full Filter List</h2>
-          <img className="styleImage" src="DeepFilterStyles.jpg" />
-        </div>
-        <div id="imageContainer" />
-        //MDB React Template
         <div id="classicformpage">
           <Router>
             <div>
@@ -347,6 +300,11 @@ class App extends Component {
             </MDBRow>
           </MDBContainer>
         </div>
+        <div className="styleImageContainer tempting-azure-gradient">
+          <h2>Full Filter List</h2>
+          <img className="styleImage" src="DeepFilterStyles.jpg" />
+        </div>
+        <div id="imageContainer" />
       </div>
     );
   }
