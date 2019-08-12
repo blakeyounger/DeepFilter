@@ -192,20 +192,6 @@ class App extends Component {
                         <MDBNavLink to="#!">Profile</MDBNavLink>
                       </MDBNavItem>
                     </MDBNavbarNav>
-                    <MDBNavbarNav right>
-                      <MDBNavItem>
-                        <MDBFormInline waves>
-                          <div className="md-form my-0">
-                            <input
-                              className="form-control mr-sm-2"
-                              type="text"
-                              placeholder="Search"
-                              aria-label="Search"
-                            />
-                          </div>
-                        </MDBFormInline>
-                      </MDBNavItem>
-                    </MDBNavbarNav>
                   </MDBCollapse>
                 </MDBContainer>
               </MDBNavbar>
@@ -239,6 +225,7 @@ class App extends Component {
                   <MDBCol md="6" xl="5" className="mb-4">
                     <MDBAnimation type="fadeInRight" delay=".3s">
                       <MDBCard id="classic-card" class>
+                        <div className="mt-2" />
                         <h3>Image URL</h3>
                         <form action="">
                           <input
@@ -287,21 +274,15 @@ class App extends Component {
             <MDBRow className="py-5">
               <MDBCol md="12" className="text-center">
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
+                  This application uses a cutting edge computer science
+                  technology called Neural Style Transfer.
                 </p>
               </MDBCol>
             </MDBRow>
           </MDBContainer>
         </div>
-        <div className="styleImageContainer tempting-azure-gradient">
-          <h2>Full Filter List</h2>
+        <div className="styleImageContainer heavy-rain-gradient">
+          <h1>Full Style List</h1>
           <img className="styleImage" src="DeepFilterStyles.jpg" />
         </div>
         <div id="imageContainer" />
