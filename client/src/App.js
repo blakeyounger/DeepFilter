@@ -41,10 +41,11 @@ class App extends Component {
     this.handleSourceImageChange = this.handleSourceImageChange.bind(this);
     //this.toggleQualityMode = this.toggleQualityMode.bind(this);
   }
-  toggleCollapse = collapseID => () =>
+  toggleCollapse = collapseID => () => {
     this.setState(prevState => ({
       collapseID: prevState.collapseID !== collapseID ? collapseID : ""
     }));
+  };
 
   componentDidMount() {
     // Call our fetch function below once the component mounts
@@ -156,13 +157,6 @@ class App extends Component {
     const dropdownStyles = styleNames.map(style => (
       <option value="{style}">{style}</option>
     ));
-    const overlay = (
-      <div
-        id="sidenav-overlay"
-        style={{ backgroundColor: "transparent" }}
-        onClick={this.toggleCollapse("navbarCollapse")}
-      />
-    );
     return (
       <div className="App">
         <div id="classicformpage">
@@ -176,26 +170,19 @@ class App extends Component {
                   <MDBNavbarToggler
                     onClick={this.toggleCollapse("navbarCollapse")}
                   />
-                  <MDBCollapse
-                    id="navbarCollapse"
-                    isOpen={this.state.collapseID}
-                    navbar
-                  >
-                    <MDBNavbarNav left>
-                      <MDBNavItem active>
-                        <MDBNavLink to="#!">Home</MDBNavLink>
-                      </MDBNavItem>
-                      <MDBNavItem>
-                        <MDBNavLink to="#!">Link</MDBNavLink>
-                      </MDBNavItem>
-                      <MDBNavItem>
-                        <MDBNavLink to="#!">Profile</MDBNavLink>
-                      </MDBNavItem>
-                    </MDBNavbarNav>
-                  </MDBCollapse>
+                  <MDBNavbarNav left>
+                    <MDBNavItem active>
+                      <MDBNavLink to="#!">Home</MDBNavLink>
+                    </MDBNavItem>
+                    <MDBNavItem>
+                      <MDBNavLink to="#!">Link</MDBNavLink>
+                    </MDBNavItem>
+                    <MDBNavItem>
+                      <MDBNavLink to="#!">Profile</MDBNavLink>
+                    </MDBNavItem>
+                  </MDBNavbarNav>
                 </MDBContainer>
               </MDBNavbar>
-              {this.state.collapseID && overlay}
             </div>
           </Router>
           <MDBView>
@@ -270,21 +257,27 @@ class App extends Component {
               </MDBContainer>
             </MDBMask>
           </MDBView>
-          <MDBContainer>
-            <MDBRow className="py-5">
-              <MDBCol md="12" className="text-center">
-                <p>
-                  This application uses a cutting edge computer science
-                  technology called Neural Style Transfer.
-                </p>
-              </MDBCol>
-            </MDBRow>
-          </MDBContainer>
         </div>
-        <div className="styleImageContainer heavy-rain-gradient">
-          <h1>Full Style List</h1>
-          <img className="styleImage" src="DeepFilterStyles.jpg" />
-        </div>
+        <MDBView className="special-color-dark">
+          <MDBBtn
+            color="primary"
+            onClick={this.toggleCollapse("basicCollapse")}
+            style={{ marginBottom: "1rem" }}
+          >
+            Full Style List
+          </MDBBtn>
+          <MDBCollapse id="basicCollapse" isOpen={this.state.collapseID}>
+            <MDBContainer className="mx-auto">
+              <div className="styleImageContainer special-color-dark ">
+                <img
+                  className="styleImage mx-auto"
+                  src="DeepFilterStyles.jpg"
+                />
+              </div>
+            </MDBContainer>
+          </MDBCollapse>
+        </MDBView>
+
         <div id="imageContainer" />
       </div>
     );
