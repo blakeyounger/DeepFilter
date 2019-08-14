@@ -102,6 +102,10 @@ class App extends Component {
     this.setState({ sourceImageURL: event.target.value });
   }
 
+  showDeepStyledPicContainer() {
+    console.log("showDeepStyledPicContainer() triggered");
+  }
+
   // toggleQualityMode() {
   //   //console.log("toggleQualityMode() triggered");
   //   // if (this.state.qualityMode === false) {
@@ -244,7 +248,10 @@ class App extends Component {
                         <p>{this.state.qualityMode.toString()}</p>
 
                         <MDBBtn
-                          onClick={this.callMyAPI}
+                          onClick={() => {
+                            this.callMyAPI();
+                            this.showDeepStyledPicContainer();
+                          }}
                           color="dark"
                           className="mt-3"
                         >
