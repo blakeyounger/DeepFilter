@@ -23,6 +23,7 @@ import {
   MDBFormInline,
   MDBAnimation
 } from "mdbreact";
+import DeepStyledPicContainer from "./components/DeepStyledPicContainer";
 import logo from "./logo.svg";
 import "./App.css";
 
@@ -32,7 +33,10 @@ class App extends Component {
     styleName: "alien_goggles",
     sourceImageURL: null,
     qualityMode: false,
-    collapseID: ""
+    collapseID: "",
+    showDeepStyledPicContainer: true,
+    resultRecieved: false,
+    deepStyledPicData: null
   };
   constructor(props) {
     super(props);
@@ -65,6 +69,7 @@ class App extends Component {
   };
 
   callMyAPI = async () => {
+    console.log("Sending POST request to /api");
     const response = await fetch("/api", {
       method: "POST",
       headers: {
@@ -82,11 +87,13 @@ class App extends Component {
       throw Error(body.message);
     }
     console.log(body.imageBase64);
-    let data = body.imageBase64;
-    const Image = ({ data }) => <img src={`data:image/jpeg;base64,${data}`} />;
-    ReactDOM.render(
-      <Image data={data} />,
-      document.getElementById("imageContainer")
+
+    this.setState({
+      deepStyledPicData: body.imageBase64,
+      resultRecieved: true
+    });
+    console.log(
+      "state.deepStyledPicData has changed to " + this.state.deepStyledPicData
     );
   };
 
@@ -104,6 +111,7 @@ class App extends Component {
 
   showDeepStyledPicContainer() {
     console.log("showDeepStyledPicContainer() triggered");
+    this.setState({ showDeepStyledPicContainer: true });
   }
 
   // toggleQualityMode() {
@@ -174,17 +182,6 @@ class App extends Component {
                   <MDBNavbarToggler
                     onClick={this.toggleCollapse("navbarCollapse")}
                   />
-                  <MDBNavbarNav left>
-                    <MDBNavItem active>
-                      <MDBNavLink to="#!">Home</MDBNavLink>
-                    </MDBNavItem>
-                    <MDBNavItem>
-                      <MDBNavLink to="#!">Link</MDBNavLink>
-                    </MDBNavItem>
-                    <MDBNavItem>
-                      <MDBNavLink to="#!">Profile</MDBNavLink>
-                    </MDBNavItem>
-                  </MDBNavbarNav>
                 </MDBContainer>
               </MDBNavbar>
             </div>
@@ -199,7 +196,7 @@ class App extends Component {
                     className="white-text text-center text-md-left col-md-6 mt-xl-5 mb-5"
                   >
                     <h1 className="h1-responsive font-weight-bold">
-                      Deepfry your pictures
+                      Deepstyle your pictures
                     </h1>
                     <hr className="hr-light" />
                     <h6 className="mb-4">
@@ -267,6 +264,14 @@ class App extends Component {
         </div>
         <div class="spinner-grow text-primary" role="status">
           <span class="sr-only">Loading...</span>
+        </div>
+        <div>
+          {this.state.showDeepStyledPicContainer ? (
+            <DeepStyledPicContainer
+              resultRecieved={this.state.resultRecieved}
+              deepStyledPicData={this.state.deepStyledPicData}
+            />
+          ) : null}
         </div>
         <MDBView className="special-color-dark">
           <MDBBtn
