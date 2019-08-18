@@ -34,7 +34,7 @@ class App extends Component {
     sourceImageURL: null,
     qualityMode: false,
     collapseID: "",
-    showDeepStyledPicContainer: true,
+    showDeepStyledPicContainer: false,
     resultRecieved: false,
     deepStyledPicData: null
   };
@@ -80,6 +80,9 @@ class App extends Component {
         filterName: this.state.styleName,
         imageURL: this.state.sourceImageURL
       })
+    });
+    this.setState({
+      showDeepStyledPicContainer: true
     });
     const body = await response.json();
 
@@ -242,7 +245,7 @@ class App extends Component {
             id="checkbox1"
             checked={this.state.qualityMode}
           /> */}
-                        <p>{this.state.qualityMode.toString()}</p>
+                        <p>Quality mode: {this.state.qualityMode.toString()}</p>
 
                         <MDBBtn
                           onClick={() => {
@@ -262,9 +265,7 @@ class App extends Component {
             </MDBMask>
           </MDBView>
         </div>
-        <div class="spinner-grow text-primary" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
+
         <div>
           {this.state.showDeepStyledPicContainer ? (
             <DeepStyledPicContainer
@@ -273,24 +274,11 @@ class App extends Component {
             />
           ) : null}
         </div>
-        <MDBView className="special-color-dark">
-          <MDBBtn
-            color="primary"
-            onClick={this.toggleCollapse("basicCollapse")}
-            style={{ marginBottom: "1rem" }}
-          >
-            Full Style List
-          </MDBBtn>
-          <MDBCollapse id="basicCollapse" isOpen={this.state.collapseID}>
-            <MDBContainer className="mx-auto">
-              <div className="styleImageContainer special-color-dark ">
-                <img
-                  className="styleImage mx-auto"
-                  src="DeepFilterStyles.jpg"
-                />
-              </div>
-            </MDBContainer>
-          </MDBCollapse>
+        <MDBView className="mx-auto special-color-dark pt-4">
+          <h2 className="text-white pb-2">Full Style List</h2>
+          <div className="styleImageContainer special-color-dark ">
+            <img className="styleImage mx-auto" src="DeepFilterStyles.jpg" />
+          </div>
         </MDBView>
 
         <div id="imageContainer" />
