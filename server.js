@@ -13,6 +13,26 @@ const port = process.env.PORT || 5000;
 var algorithmia = require("algorithmia");
 var client = algorithmia("simq2Mg/MzWZUNQ2f4dH3UklgRr1");
 
+//this section of code should only run when in production, when the app is in Heroku
+if (process.env.NODE_ENV === "production") {
+  //Express will serve up production assets
+  //for example, main.js or main.css
+  //this is meant to respond to a request for a specific file
+  //for example, /client/build/static/js/main.js
+  app.use(express.static("client/build")); //if a request comes for a route that does not have a route handler, then look in the client/build directory to find the file
+  //if the file cannot be found using the line above, it will execute the code below
+
+  //Express will serve up the index.html file
+  //if it doesn't recognize the route
+  //this is meant to be a catch-all if the route is not handled above
+  //this assumes React-router knows what to do with this route
+
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
+
 // create a GET route
 app.get("/express_backend", (req, res) => {
   res.send({ express: "YOUR EXPRESS BACKEND IS CONNECTED TO REACT" });
